@@ -97,8 +97,61 @@
   height:20vh;
   width:100%;
   color:#ffffff;
-  padding-top:5vh;
+  padding-top:6vh;
   padding-left:2vw;
   background:linear-gradient(to right, rgb(110, 110, 168),rgb(179, 53, 74));
-  margin-top:8vh;
+  margin-top:6vh;
  }
+.add-to-cart-btn{
+  height:5vh;
+  background-color: #2d79f3;
+  border:none;
+  color:white;
+  border-radius:4px;
+}
+.order-now-btn{
+  height:5vh;
+  border:1px solid rgb(185, 79, 79);
+   color:rgb(209, 53, 53);
+   border-radius:4px;
+}
+.search-box{
+  height:7vh;
+  width:38vw;
+  background-color: #ecedec;
+  border:none;
+}
+
+.search-div-box{
+  width:50vw;
+  border:1px solid grey;
+  background-color: #ecedec;
+  border-radius:10px;
+  display:flex;
+  margin-left:25vw;
+}
+.select-item{
+  border:none;
+  border-radius:6px 0px 0px 6px;
+  width:5vw;
+}
+
+.footer-row-1{
+  width:100%;
+  height:15vh;
+  padding-left:40vw;
+  padding-top:5vh;
+  background:rgb(238, 238, 238);
+}
+.footer-row-2{
+  width:100%;
+  height:10vh;
+  padding-left:37vw;
+  padding-top:3vh;
+  background:rgb(178, 176, 176);
+}
+.footer-icon-a{
+  text-decoration:none;
+  color:rgb(5, 109, 246);
+  margin-right:2vw;
+}

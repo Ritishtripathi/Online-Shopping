@@ -16,11 +16,11 @@ function Header() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav"> 
           <Nav  style={{marginLeft:'60vw',fontSize:'16px'}}>
-            <Nav.Link href="#deets"style={{color:'white'}} ><HomeIcon/>Home</Nav.Link>
-            <Nav.Link href="#memes" style={{color:'white'}} ><ShoppingBagIcon/>Shop </Nav.Link>
-            <Nav.Link href="#deets" style={{color:'white'}}><ShoppingCartIcon/>Cart</Nav.Link>
-            <Nav.Link href="#memes" style={{color:'white'}}><AccountCircleIcon/> SignIn </Nav.Link>
-            <Nav.Link href="#deets" style={{color:'white'}}><PersonAddIcon/>Signup</Nav.Link>
+            <Nav.Link href="/Index"style={{color:'white'}}className='header-hover'><HomeIcon/>Home</Nav.Link>
+            <Nav.Link href="/" style={{color:'white'}} ><ShoppingBagIcon/>Shop </Nav.Link>
+            <Nav.Link href="/" style={{color:'white'}}><ShoppingCartIcon/>Cart</Nav.Link>
+            <Nav.Link href="/Login" style={{color:'white'}}><AccountCircleIcon/> SignIn </Nav.Link>
+            <Nav.Link href="/Signup" style={{color:'white'}}><PersonAddIcon/>Signup</Nav.Link>
        
           </Nav>
         </Navbar.Collapse>
