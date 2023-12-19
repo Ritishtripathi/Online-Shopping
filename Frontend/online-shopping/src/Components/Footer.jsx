@@ -58,7 +58,7 @@ function Footer(){
         <Col sm={12}>
         <div className="footer-row-2">
             <span>Copyright © and develope By 2023 <a href="https://www.google.com/search?q=ritish+tripathi&oq=ritish&aqs=chrome.0.69i59l3j0i512l2j46i10i340i512j69i64j69i61.1734j0j7&sourceid=chrome&ie=UTF-8#vhid=mydzcUs4Fyi1RM&vssid=l">Ritish Tripathi</a>
-     </span>
+                </span>
                </div>
         </Col>
         </Row>

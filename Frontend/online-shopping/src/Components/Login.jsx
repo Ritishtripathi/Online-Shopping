@@ -3,6 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { Col } from "react-bootstrap";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 function Login(){
 
   const [data,setformdata]=useState({
@@ -30,17 +33,26 @@ function Login(){
      }
     }
     catch(error){
-
+    console.error(error);
     }
   }
     return(
-        <div>
-            <Header/>
-            <div className="header-signup">
+      <Container fluid>
+        <Row>
+          <Col sm={12}>
+                 <Header/>
+          </Col>
+        </Row><br/><br/>
+        <Row>
+          <div className="header-signup">
         <h4>Sigin Page</h4>
         SignIn to a world of shopping
      </div>
-        <form className="form" onSubmit={handlelogin}>
+        </Row>
+        <Row>
+          <Col sm={4}></Col>
+          <Col sm={4}>
+          <form className="form" onSubmit={handlelogin}>
     <div className="flex-column">
       <label className="label">Email </label></div>
       <div className="inputForm">
@@ -67,8 +79,11 @@ function Login(){
     <p className="p">Don't have an account? <Link to='/Signup' className="span">Sign Up</Link></p>
 
    </form>
-
-        </div>
+          </Col>
+          <Col sm={4}></Col>
+        </Row>
+      </Container>
+    
     )
 }
 export default Login;

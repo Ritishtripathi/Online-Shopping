@@ -7,6 +7,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import { Link } from 'react-router-dom';
 
 function Header() {
   return (
@@ -15,13 +16,12 @@ function Header() {
         <Navbar.Brand style={{fontWeight:'bold',fontSize:'22px',color:'whitesmoke'}}>< MonetizationOnIcon/>Shopify</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav"> 
-          <Nav  style={{marginLeft:'60vw',fontSize:'16px'}}>
-            <Nav.Link href="/Index"style={{color:'white'}}className='header-hover'><HomeIcon/>Home</Nav.Link>
-            <Nav.Link href="/" style={{color:'white'}} ><ShoppingBagIcon/>Shop </Nav.Link>
-            <Nav.Link href="/" style={{color:'white'}}><ShoppingCartIcon/>Cart</Nav.Link>
-            <Nav.Link href="/Login" style={{color:'white'}}><AccountCircleIcon/> SignIn </Nav.Link>
-            <Nav.Link href="/Signup" style={{color:'white'}}><PersonAddIcon/>Signup</Nav.Link>
-       
+          <Nav  style={{marginLeft:'60vw',fontSize:'16px',gap:'1vw'}}>
+            <Link to="/Index"style={{color:'white',textDecoration:'none'}}className='header-hover'><HomeIcon/> Home</Link>
+            <Link to="/Shop" style={{color:'white',textDecoration:'none'}} ><ShoppingBagIcon/> Shop </Link>
+            <Link to="/" style={{color:'white',textDecoration:'none'}}><ShoppingCartIcon/> Cart</Link>
+            <Link to="/Login" style={{color:'white',textDecoration:'none'}}><AccountCircleIcon/> SignIn </Link>
+            <Link to="/Signup" style={{color:'white',textDecoration:'none'}}><PersonAddIcon/> Signup</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

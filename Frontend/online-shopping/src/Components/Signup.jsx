@@ -3,6 +3,10 @@ import Header from "./Header";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Swal from "sweetalert2";
+import { Col } from "react-bootstrap";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+
 const Signup=()=>{
 
      
@@ -44,12 +48,23 @@ const Navigate=useNavigate();
 
     return(
      <>
-     <Header/>
-     <div className="header-signup">
-        <h4>Signup Page</h4>
-        Signup to a world of shopping
-     </div>
-   <div  className="form">
+       <Container fluid>
+        <Row>
+        <Col sm={12}> <Header/></Col>
+        </Row><br/><br/>
+        <Row>
+          
+            <div className="header-signup">
+            <h4>Signup Page</h4>
+            Signup to a world of shopping
+            </div>
+          
+        </Row>
+        <Row>
+          <Col sm={4}></Col>
+          <Col sm={4}>
+
+    <div  className="form">
    <form  onSubmit={submit}>  
     <div className="flex-column">
     <label className="label">Name </label></div>
@@ -71,6 +86,10 @@ const Navigate=useNavigate();
     <p className="p">Already have account ? <Link to='/Login' className="span">Sign In</Link></p>
 
   </div>
+          </Col>
+          <Col sm={4}></Col>
+        </Row>
+       </Container>
      </>
     );
 }

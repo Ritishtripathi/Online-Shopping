@@ -1,7 +1,7 @@
 .form {
     display: flex;
     flex-direction: column;
-    margin-left:35vw;
+    /* margin-left:35vw; */
     margin-top:5vh;
    
     gap: 10px;
@@ -93,6 +93,14 @@
     font-size: 14px;
     margin: 10px 0;
   }
+
+/* css of payment gatway */
+
+
+
+  /* our css for header and cards */
+
+
  .header-signup{
   height:20vh;
   width:100%;
@@ -120,6 +128,7 @@
   width:38vw;
   background-color: #ecedec;
   border:none;
+  outline: none;
 }
 
 .search-div-box{
@@ -128,7 +137,7 @@
   background-color: #ecedec;
   border-radius:10px;
   display:flex;
-  margin-left:25vw;
+  
 }
 .select-item{
   border:none;
