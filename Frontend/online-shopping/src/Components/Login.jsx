@@ -29,7 +29,7 @@ function Login(){
         titel:'success',
         text:'Login successfully!'
         });
-        Navigate('/Index')
+        Navigate('/Dashboard')
      }
     }
     catch(error){

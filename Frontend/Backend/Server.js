@@ -64,4 +64,17 @@ app.post('/login',async(req,res)=>{
       console.error(error);
       res.status(500).json({message:'error during signin'});
     }
-})
+});
+
+//user data show api
+
+app.get('/user/data',async(req,res)=>{
+    try{
+      const customer= await User.find();
+      res.json({customer})
+    }
+    catch(error){
+      console.error('error during get data',error);
+      res.status(500).json({message:'interwal error'});
+    }
+});
