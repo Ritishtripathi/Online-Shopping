@@ -25,7 +25,6 @@ function App() {
       <Route path='/Rupay' element={<Rupay/>}/>
       <Route path='/Shop' element={<Shop/>}/>
       <Route path='/Dashboard' element={<Dashboard/>}/>
-v
     </Routes>
   </Router>
   );

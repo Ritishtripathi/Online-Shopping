@@ -13,7 +13,8 @@ const Signup=()=>{
   const [Data, setFormData] = useState({
     name: '',
     email: '',
-    password: ''
+    password: '',
+    Key:''
   });
 const Navigate=useNavigate();
   const register = (e) => {
@@ -24,13 +25,13 @@ const Navigate=useNavigate();
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/customer', Data);
+      const response = await axios.post('http://localhost:3001/Signup', Data);
       if (response && response.data) {
         console.log(response.data);
         Swal.fire({
           icon:'success',
           titel:'success',
-          text:'Reggistration successfully!'
+          text:'Registration successfully!'
           });
           Navigate('/Login');
       }
@@ -80,6 +81,11 @@ const Navigate=useNavigate();
       <label className="label">Password </label></div>
       <div className="inputForm">
         <input type="password" className="input" placeholder="Enter your Password" name='password' value={Data.password} onChange={register}/>
+        </div>
+        <div className="flex-column">
+      <label className="label">Key*</label></div>
+        <div className="inputForm">
+        <input type="text" className="input" placeholder="Enter your Key" name='Key' value={Data.Key} onChange={register}/>
         </div>
     <button className="button-submit" type="submit">SIGN UP</button>
     </form>

@@ -16,7 +16,7 @@ function Dashboard(){
       const fetchData = async () => {
         try {
           const response = await axios.get('http://localhost:3001/user/data');
-          setUserData(response.data.customer);
+          setUserData(response.data.user);
         } catch (error) {
           console.error('Error fetching data:', error);
         }

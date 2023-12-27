@@ -1,6 +1,7 @@
 const mongoose=require('mongoose');
 const bodyParser=require('body-parser');
 const express=require('express');
+const jwt=require('jsonwebtoken');
 const port=3001;
 const cors=require('cors');
 const app=express();
@@ -28,53 +29,77 @@ app.use(bodyParser.json());
 const User= mongoose.model('User',{
     name:String,
     email:String,
-    password:String
+    password:String,
+    Key:String
 });
+
+// middleware for authentcation 
+const authenticateToken= (req,res,next)=>{
+    const token =req.header('Authorization');
+    if(!token) return res.status(401).json({message:'Access is Denied No token provided.'});
+
+    jwt.verify(token.split('')[1],'your_secret_key',(err,)=>{
+        if(err) return res.status(403).json({message:'Invalid Token'})
+        req.user=user;
+    next();
+
+    });
+};
+
+
+
+
 
 //Signup post API
 
-app.post('/customer',async(req,res)=>{
-    const{name,email,password}=req.body;
-    try{
-     const users= new User ({name,email,password});
-     await users.save();
-     res.json({message:'user added success'});
-    }
-    catch(error){
-        console.error(error);
-        res.status(500).json({message:'error during post data'});
-    }
-});
+app.post('/Signup', async(req,res)=>
+{
+const{name,email,password,Key}=req.body;
+try{
+const users=new User ({name,email,password,Key});
+await users.save();
+res.json({ Key:users.key,message:"Signup successFull "});
+}
+catch (error){
+console.error(error);
+res.status(500).json({messagge:"Error during Post data on signup"});
+}
+})
 
-//login API
 
-app.post('/login',async(req,res)=>{
+// Login api 
+app.post('/login',async (req,res)=>{
     const {email,password}=req.body;
     try{
-        const user =await User.findOne({email});
-        if(!user || user.password!==password){
-           return res.status(401).json({message:'userid not match'});
-        }
-        else{
-            res.json({message:'login successfull!'});
-        }
+    const user=await User.findOne({email});
+    if(!user || user.password!==password){
+    return res.status(401).json({Messge:"Invalid credential "})
+    } 
+
+ else{
+
+// Gentare JWT Token 
+
+     const token=jwt.sign({userId:user._id,email:user.email},'your sectre_key',{expiresIn:'5s'});
+     res.status(200).json({Message:"Login Succesfull",token});
 
     }
-    catch(error){
-      console.error(error);
-      res.status(500).json({message:'error during signin'});
+}
+    catch (error){
+console.error(error);
+    res.status(500).json({Message:"Error during login"});
     }
 });
 
-//user data show api
-
-app.get('/user/data',async(req,res)=>{
-    try{
-      const customer= await User.find();
-      res.json({customer})
-    }
-    catch(error){
-      console.error('error during get data',error);
-      res.status(500).json({message:'interwal error'});
-    }
+// Protect Route Examplle 
+app.get('/protected-route',authenticateToken,(req,res)=>{
+    res.json({Message:"This is Protected Rpute ",user:req.user});
 });
+
+
+
+
+
+
+
+
