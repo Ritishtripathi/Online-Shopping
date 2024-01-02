@@ -13,10 +13,30 @@ import swa from './images/swa.jpg';
 import speaker from './images/s5.jpg';
 import e3 from './images/oppok10.jpg';
 import fan from './images/wm3.jpg';
+import AddProduct from '../Components/AddProduct'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 function Items() {
+
+  const [data,setdata]=useState([]);
+  useEffect(()=>{
+    const fetchData=async()=>{
+     try{
+      const response = await axios.get('http://localhost:3001/Product/data');
+      setdata(response.data.Product);
+    }
+     catch (error) {
+      console.error('Error fetching data:', error);
+    }
+    }
+    fetchData();
+  },[]);
   return (
     <Container>
-       <h3>New Arrivals!</h3><br/><br/>
+       <Row>
+        <Col sm={10}>  <h3>New Arrivals!</h3></Col>
+        <Col sm={2}><AddProduct/></Col>
+       </Row> <br/><br/>
       <Row>
         {/* //card start from here */}
         <Col sm={3}>
@@ -207,8 +227,38 @@ function Items() {
         </Col>
       </Row>
 
+
+      <br/>
+
+      {/* Show data from mongoose */}
+
+
+<Row>
+<Col sm={3}>
+  {data.map(Product => (
+    <Card sx={{ maxWidth: 255 }} key={Product._id}>
+      <img src="{Product.Pimage}"/>
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {Product.Pname}<h6>{Product.Pdecription}</h6>
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          <p style={{ color: 'green', fontSize: '18px' }}>Special price</p>
+          <span style={{ display: 'flex', gap: '8px' }}>
+            <h5 style={{ color: 'black' }}>₹{Product.Pprice}</h5><strike style={{ marginTop: '5px' }}>₹{Product.Pdiscountprice}</strike> <p style={{ color: 'green', fontSize: '18px' }}> 26% off</p>
+          </span>
+        </Typography>
+      </CardContent>
+      <CardActions style={{ gap: '2vw' }}>
+        <button size="small" className="add-to-cart-btn">Add to cart</button>
+        <button size="small" className="order-now-btn">Order Now</button>
+      </CardActions>
+    </Card>
+  ))}
+</Col>
+       </Row>
     </Container>
   );
-}
+} 
 
 export default Items;

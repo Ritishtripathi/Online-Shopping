@@ -2,7 +2,6 @@ import React,{useState,useEffect} from "react";
 import { Col } from "react-bootstrap";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Header2 from './Header2';
 import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -10,9 +9,14 @@ import axios from "axios";
 
 function Dashboard(){
 
+  const storedata =localStorage.getItem('data');
+  const data=storedata ? JSON.parse(storedata): null;
+  console.log("GETDATA BY LOCALSTORAGE",data);
+  const email=data.email;
+  console.log("gmail",email);
     const [userData, setUserData] = useState([]);
   
-    useEffect(() => {
+    useEffect(() => { 
       const fetchData = async () => {
         try {
           const response = await axios.get('http://localhost:3001/user/data');
@@ -28,14 +32,11 @@ function Dashboard(){
 
     return(
         <Container fluid>
-            <Row>
-                <Col sm={12}><Header2/></Col>
-            </Row><br/><br/>
+            
             <Row>
           <div className="header-signup">
         <h4>Dashboard</h4>
-        Welcome User!
-     </div>
+        Welcome {email}     </div>
         </Row>
             <br/><br/>
             <Row>

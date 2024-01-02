@@ -27,11 +27,17 @@ const Login=()=> {
       if (response && response.data && response.data.token) {
         console.log(response.data);
         // Store the token in localStorage
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('token ', response.data.token);
+
+        // data inn localstorage '
+        localStorage.setItem('data',JSON.stringify(data));
+
+        
+
         console.log("localstorage",localStorage);
 
         Swal.fire({
-          icon: 'success',
+          icon: 'success', 
           title: 'Success',
           text: 'Login successful!'
         });

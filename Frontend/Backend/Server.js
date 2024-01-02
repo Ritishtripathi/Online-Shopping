@@ -2,6 +2,18 @@ const mongoose=require('mongoose');
 const bodyParser=require('body-parser');
 const express=require('express');
 const jwt=require('jsonwebtoken');
+const multer=require('multer');
+const path=require('path');
+//setup upload image
+const storage=multer.diskStorage({
+    destination:'./uploads/',
+    filename:function(req,file,cb){
+        cb(null,file.filename+'-'+Date.now()+path.extname(file.originalname));
+    }
+});
+
+const upload=multer({storage:storage});
+
 const port=3001;
 const cors=require('cors');
 const app=express();
@@ -33,6 +45,15 @@ const User= mongoose.model('User',{
     Key:String
 });
 
+//create model of product
+
+const product=mongoose.model('product',{
+    Pname:String,
+    Pdecription:String,
+    Pprice:String,
+    Pdiscountprice:String,
+    Pimage:String
+});
 // middleware for authentcation 
 const authenticateToken= (req,res,next)=>{
     const token =req.header('Authorization');
@@ -64,8 +85,36 @@ catch (error){
 console.error(error);
 res.status(500).json({messagge:"Error during Post data on signup"});
 }
-})
+});
 
+//Product add API 
+
+app.post('/product',upload.single('Pimage'),async(req,res)=>{
+    const{Pname,Pdecription,Pprice,Pdiscountprice}=req.body;
+
+    try{
+        const imagepath=req.file?req.file.path:'';
+        const Product=new product({Pname,Pdecription,Pprice,Pdiscountprice,Pimage:imagepath});
+        await Product.save();
+        res.status(200).json({message:'saved! successfully'});
+    }
+    catch(error){
+        console.log("Error in adding the Product");
+        res.status(500).json({message:'error during!'});
+    }
+});
+
+//show data API 
+app.get('/product/data',async(req,res)=>{
+    try{
+        const Product=await product.find();
+        res.json({Product});
+    }
+    catch(error){
+        console.error(error);
+        res.status(404).json({message:'not found!'})
+    }
+})
 
 // Login api 
 app.post('/login',async (req,res)=>{
@@ -75,7 +124,6 @@ app.post('/login',async (req,res)=>{
     if(!user || user.password!==password){
     return res.status(401).json({Messge:"Invalid credential "})
     } 
-
  else{
 
 // Gentare JWT Token 
