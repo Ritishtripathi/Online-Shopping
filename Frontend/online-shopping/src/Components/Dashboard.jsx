@@ -8,12 +8,21 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import axios from "axios";
 
 function Dashboard(){
+// display data from local storage
 
+
+console.log("get data ",localStorage
+);
   const storedata =localStorage.getItem('data');
   const data=storedata ? JSON.parse(storedata): null;
   console.log("GETDATA BY LOCALSTORAGE",data);
   const email=data.email;
   console.log("gmail",email);
+
+
+
+  // get user data by using api call
+  
     const [userData, setUserData] = useState([]);
   
     useEffect(() => { 

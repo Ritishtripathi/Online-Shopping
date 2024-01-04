@@ -114,7 +114,7 @@ app.get('/product/data',async(req,res)=>{
         console.error(error);
         res.status(404).json({message:'not found!'})
     }
-})
+});
 
 // Login api 
 app.post('/login',async (req,res)=>{
@@ -124,11 +124,9 @@ app.post('/login',async (req,res)=>{
     if(!user || user.password!==password){
     return res.status(401).json({Messge:"Invalid credential "})
     } 
- else{
-
+ else{ 
 // Gentare JWT Token 
-
-     const token=jwt.sign({userId:user._id,email:user.email},'your sectre_key',{expiresIn:'5s'});
+     const token=jwt.sign({userId:user._id,email:user.email},'your sectre_key',{expiresIn:'2s'});
      res.status(200).json({Message:"Login Succesfull",token});
 
     }
@@ -138,6 +136,19 @@ console.error(error);
     res.status(500).json({Message:"Error during login"});
     }
 });
+
+//user innformation data API
+
+app.get('/user/data',async(req,res)=>{
+    try{
+        const user=await User.find();
+        return res.json({user});
+    }
+    catch(error){
+        console.log(error);
+        return res.status(404).json({message:'unsepted error'})
+    }
+})
 
 // Protect Route Examplle 
 app.get('/protected-route',authenticateToken,(req,res)=>{

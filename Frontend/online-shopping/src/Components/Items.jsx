@@ -18,19 +18,25 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 function Items() {
 
-  const [data,setdata]=useState([]);
-  useEffect(()=>{
-    const fetchData=async()=>{
-     try{
-      const response = await axios.get('http://localhost:3001/Product/data');
-      setdata(response.data.Product);
-    }
-     catch (error) {
-      console.error('Error fetching data:', error);
-    }
-    }
+  const [userData, setUserData] = useState([]);
+  
+  useEffect(() => { 
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/product/data');
+        setUserData(response.data.Product);
+        console.log(response.data.Product)
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
     fetchData();
-  },[]);
+  }, []);
+
+
+
+
   return (
     <Container>
        <Row>
@@ -234,29 +240,31 @@ function Items() {
 
 
 <Row>
-<Col sm={3}>
-  {data.map(Product => (
-    <Card sx={{ maxWidth: 255 }} key={Product._id}>
-      <img src="{Product.Pimage}"/>
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {Product.Pname}<h6>{Product.Pdecription}</h6>
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          <p style={{ color: 'green', fontSize: '18px' }}>Special price</p>
-          <span style={{ display: 'flex', gap: '8px' }}>
-            <h5 style={{ color: 'black' }}>₹{Product.Pprice}</h5><strike style={{ marginTop: '5px' }}>₹{Product.Pdiscountprice}</strike> <p style={{ color: 'green', fontSize: '18px' }}> 26% off</p>
-          </span>
-        </Typography>
-      </CardContent>
-      <CardActions style={{ gap: '2vw' }}>
-        <button size="small" className="add-to-cart-btn">Add to cart</button>
-        <button size="small" className="order-now-btn">Order Now</button>
-      </CardActions>
-    </Card>
+<Col sm={12} style={{display:'flex',gap:'6vw'}}  >
+  {userData.map(Product =>(
+    <Card sx={{ maxWidth: 255  }} key={Product._id} >
+    <img src={Product.Pimage}/>
+    <CardContent>
+      <Typography gutterBottom variant="h5" component="div">
+        {Product.Pname}<h6>{Product.Pdecription}</h6>
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+        <p style={{ color: 'green', fontSize: '18px' }}>Special price</p>
+        <span style={{ display: 'flex', gap: '8px' }}>
+          <h5 style={{ color: 'black' }}>₹{Product.Pprice}</h5><strike style={{ marginTop: '5px' }}>₹{Product.Pdiscountprice}</strike> <p style={{ color: 'green', fontSize: '18px' }}> 26% off</p>
+        </span>
+      </Typography>
+    </CardContent>
+    <CardActions style={{ gap: '2vw' }}>
+      <button size="small" className="add-to-cart-btn">Add to cart</button>
+      <button size="small" className="order-now-btn">Order Now</button>
+    </CardActions>
+  </Card>
   ))}
 </Col>
        </Row>
+
+
     </Container>
   );
 } 
