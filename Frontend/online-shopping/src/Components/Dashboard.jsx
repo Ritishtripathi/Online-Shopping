@@ -1,42 +1,42 @@
-import React,{useState,useEffect} from "react";
+import React from "react";
 import { Col } from "react-bootstrap";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
 import ListGroup from 'react-bootstrap/ListGroup';
-import axios from "axios";
+import UpdateProfile from "./UpdateProfile";
+
 
 function Dashboard(){
 // display data from local storage
 
-
-console.log("get data ",localStorage
-);
+// console.log("get data ",localStorage
+// );
   const storedata =localStorage.getItem('data');
   const data=storedata ? JSON.parse(storedata): null;
   console.log("GETDATA BY LOCALSTORAGE",data);
   const email=data.email;
-  console.log("gmail",email);
+  const name=data.name;
+  const gender=data.gender;
 
 
-
-  // get user data by using api call
+  // // get user data by using api call
   
-    const [userData, setUserData] = useState([]);
+  //   const [userData, setUserData] = useState([]);
   
-    useEffect(() => { 
-      const fetchData = async () => {
-        try {
-          const response = await axios.get('http://localhost:3001/user/data');
-          setUserData(response.data.user);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
+  //   useEffect(() => { 
+  //     const fetchData = async () => {
+  //       try {
+  //         const response = await axios.get('http://localhost:3001/user/data');
+  //         setUserData(response.data.user);
+  //       } catch (error) {
+  //         console.error('Error fetching data:', error);
+  //       }
+  //     };
   
-      fetchData();
-    }, []);
+  //     fetchData();
+  //   }, []);
 
 
     return(
@@ -45,7 +45,7 @@ console.log("get data ",localStorage
             <Row>
           <div className="header-signup">
         <h4>Dashboard</h4>
-        Welcome {email}     </div>
+        Welcome {name}</div>
         </Row>
             <br/><br/>
             <Row>
@@ -63,23 +63,23 @@ console.log("get data ",localStorage
                     <thead>
                     <tr style={{border:'1px solid gray',height:'7vh'}}>
                         <th><h4>User information</h4></th>
+                        <th><UpdateProfile/></th>
                   </tr>
                     </thead>
                    
-                  {userData.map(user => (
+                
                     <tbody>
-                           <tr style={{border:'1px solid gray',height:'7vh'}} key={user._id}>
-                               <td>{user.name}</td>
+                           <tr style={{border:'1px solid gray',height:'7vh'}} >
+                               <td><b>Name :</b> {name}</td>
                             </tr>
                             <tr style={{border:'1px solid gray',height:'7vh'}}>
-                               <td>{user.email}</td>
+                            <td><b>Name :</b> {email}</td>
                             </tr>
                             <tr style={{border:'1px solid gray',height:'7vh'}}>
-                               <td>{user.password}</td>
+                            <td><b>Name :</b> {gender}</td>
                             </tr>
                     </tbody>      
-                  ))}
-                  </table>
+               </table>
 
                 </Col>
             </Row><br/><br />

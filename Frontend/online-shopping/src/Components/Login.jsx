@@ -28,9 +28,9 @@ const Login=()=> {
         console.log(response.data);
         // Store the token in localStorage
         localStorage.setItem('token ', response.data.token);
-
+        
         // data in localstorage '
-        localStorage.setItem('data',JSON.stringify(data));
+        localStorage.setItem('data',JSON.stringify(response.data.user));
 
         console.log("localstorage",localStorage);
 

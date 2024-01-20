@@ -9,7 +9,8 @@ import Footer from './Components/Footer';
 import Shop from './Components/Shop';
 import Dashboard from './Components/Dashboard';
 import AddProduct from './Components/AddProduct';
-import ProtectedRoute from './Components/ProtectedRoute';
+import UpdateProfile from './Components/UpdateProfile';
+
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path='/' element={<Index/>}/>
       <Route path='/Login' element={<Login/>}/>
       <Route path='/Signup' element={<Signup/>}/>
+      <Route path='/UpdateProfile' element={<UpdateProfile/>}/>
     
     
          <Route path='/Index' element={<Index/>}/>

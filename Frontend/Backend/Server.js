@@ -42,7 +42,9 @@ const User= mongoose.model('User',{
     name:String,
     email:String,
     password:String,
-    Key:String
+    Key:String,
+    gender :String
+
 });
 
 //create model of product
@@ -75,9 +77,9 @@ const authenticateToken= (req,res,next)=>{
 
 app.post('/Signup', async(req,res)=>
 {
-const{name,email,password,Key}=req.body;
+const{name,email,password,Key,gender}=req.body;
 try{
-const users=new User ({name,email,password,Key});
+const users=new User ({name,email,password,Key,gender});
 await users.save();
 res.json({ Key:users.key,message:"Signup successFull "});
 }
@@ -127,7 +129,8 @@ app.post('/login',async (req,res)=>{
  else{ 
 // Gentare JWT Token 
      const token=jwt.sign({userId:user._id,email:user.email},'your sectre_key',{expiresIn:'2s'});
-     res.status(200).json({Message:"Login Succesfull",token});
+    
+     res.status(200).json({Message:"Login Succesfull",token,user});
 
     }
 }
@@ -137,18 +140,18 @@ console.error(error);
     }
 });
 
-//user innformation data API
+// //user innformation data API
 
-app.get('/user/data',async(req,res)=>{
-    try{
-        const user=await User.find();
-        return res.json({user});
-    }
-    catch(error){
-        console.log(error);
-        return res.status(404).json({message:'unsepted error'})
-    }
-})
+// app.get('/user/data',async(req,res)=>{
+//     try{
+//         const user=await User.find();
+//         return res.json({user});
+//     }
+//     catch(error){
+//         console.log(error);
+//         return res.status(404).json({message:'unsepted error'})
+//     }
+// });
 
 // Protect Route Examplle 
 app.get('/protected-route',authenticateToken,(req,res)=>{

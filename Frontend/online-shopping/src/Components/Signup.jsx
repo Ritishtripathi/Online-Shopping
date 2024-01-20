@@ -14,7 +14,8 @@ const Signup=()=>{
     name: '',
     email: '',
     password: '',
-    Key:''
+    Key:'',
+    gender:''
   });
 const Navigate=useNavigate();
   const register = (e) => {
@@ -87,6 +88,14 @@ const Navigate=useNavigate();
         <div className="inputForm">
         <input type="text" className="input" placeholder="Enter your Key" name='Key' value={Data.Key} onChange={register}/>
         </div>
+        <div className="flex-column">
+      <label className="label">Gender</label></div>
+        <select className="inputForm"  name='gender' value={Data.gender} onChange={register} style={{width:'100%'}}>
+         <option value='male'>male</option>
+         <option value='female'>female</option>
+         <option value='other'>other</option>
+        </select>
+
     <button className="button-submit" type="submit">SIGN UP</button>
     </form>
     <p className="p">Already have account ? <Link to='/Login' className="span">Sign In</Link></p>
